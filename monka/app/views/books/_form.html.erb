@@ -1,42 +1,37 @@
 <%= form_for(book) do |f| %>
-  <% if book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
-      <ul>
-      <% book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :author %>
-    <%= f.text_field :author %>
-  </div>
-
-  <div class="field">
-    <%= f.label :published_on %>
-    <%= f.text_field :published_on %>
-  </div>
-
-  <div class="field">
-    <%= f.label :showing %>
-    <%= f.check_box :showing %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.number_field :price %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% if book.errors.any? %>
+<div id="error_explanation">
+<h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being sa
+ved:</h2>
+<ul>
+<% book.errors.full_messages.each do |message| %>
+<li><%= message %></li>
 <% end %>
+</ul>
+</div>
+<% end %>
+<div class="form-group">
+<%= f.label :title %>
+<%= f.text_field :title, class: "form-control" %>
+</div>
+<div class="form-group">
+<%= f.label :author %>
+<%= f.text_field :author, class: "form-control" %>
+</div>
+<div class="form-group">
+<%= f.label :published_on %>
+<%= f.date_select :published_on %>
+</div>
+<div class="form-group">
+<%= f.label :price %>
+<%= f.text_field :price, class: "form-control", placeholder: '半⾓数字' %>
+</div>
+<div class="form-group">
+<%= f.label :showing %>する
+<%= f.check_box :showing %>
+</div>
+<div class="actions">
+<%= f.submit title, class: "btn btn-default" %>
+</div>
+<% end %>
+<br />

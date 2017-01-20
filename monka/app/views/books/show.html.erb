@@ -1,29 +1,44 @@
+<% if notice %>
+<div class="alert alert-success alert-dismissible" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span ari
+a-hidden="true">&times;</span></button>
 <p id="notice"><%= notice %></p>
-
+</div>
+<% end %>
+<h2 class="sub-header">Book</h2>
 <p>
-  <strong>Title:</strong>
-  <%= @book.title %>
+<strong>タイトル：</strong>
+<%= @book.title %>
 </p>
-
 <p>
-  <strong>Author:</strong>
-  <%= @book.author %>
+<strong>著書：</strong>
+<%= @book.author %>
 </p>
-
 <p>
-  <strong>Published on:</strong>
-  <%= @book.published_on %>
+<strong>出版⽇：</strong>
+<%= @book.published_on.try(:strftime, '%Y年%m⽉') %>
 </p>
-
 <p>
-  <strong>Showing:</strong>
-  <%= @book.showing %>
+<strong>価格：</strong>
+<%= number_to_currency(@book.try(:price), precision: 0, unit: "円") %>
 </p>
-
 <p>
-  <strong>Price:</strong>
-  <%= @book.price %>
+<strong>発売：</strong>
+<%= @book.showing? ? '可能' : '不可' %>
 </p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<%= link_to '編集', edit_book_path(@book), class: 'btn btn-default' %>
+<%= link_to '戻る', books_path, class: 'btn btn-default' %>
+<hr>
+<p><strong>タグ</strong></p>
+<ul class="list-inline">
+<% @book.taggings.each do |tagging| %>
+<li>
+<span class="btn btn-info"><%= tagging.tag.name %></span>
+<%= link_to '編集', edit_book_tagging_path(@book, tagging), class: 'btn btn-xs btndefault'
+%>
+<%= link_to '削除', book_tagging_path(@book, tagging), method: :delete, data: { con
+firm: 'Are you sure?' }, class: 'btn btn-xs btn-default' %>
+</li>
+<% end %>
+</ul>
+<%= link_to '新規登録', new_book_tagging_path(@book), class: 'btn btn-default' %>
