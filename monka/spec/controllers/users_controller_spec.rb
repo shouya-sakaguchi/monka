@@ -19,6 +19,10 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe UsersController, type: :controller do
+  
+  let(:admin_user) { User.all.first }
+  before(:each) { sign_in admin_user }
+
 
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to

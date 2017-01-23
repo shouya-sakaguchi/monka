@@ -19,42 +19,50 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TaggingsController, type: :controller do
+  
+  let(:admin_user) { User.all.first }
+  before(:each) { sign_in admin_user }
+  
+  let(:tag) { Tag.first }
 
   # This should return the minimal set of attributes required to create a valid
   # Tagging. As you add validations to Tagging, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { book_id: book.id, tag_id: tag.id }
+    # skip("Add a hash of attributes valid for your model")
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  # let(:invalid_attributes) {
+  #   skip("Add a hash of attributes invalid for your model")
+  # }
+  
+
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TaggingsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all taggings as @taggings" do
-      tagging = Tagging.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:taggings)).to eq([tagging])
-    end
-  end
+  # describe "GET #index" do
+  #   it "assigns all taggings as @taggings" do
+  #     tagging = Tagging.create! valid_attributes
+  #     get :index, params: {}, session: valid_session
+  #     expect(assigns(:taggings)).to eq([tagging])
+  #   end
+  # end
 
-  describe "GET #show" do
-    it "assigns the requested tagging as @tagging" do
-      tagging = Tagging.create! valid_attributes
-      get :show, params: {id: tagging.to_param}, session: valid_session
-      expect(assigns(:tagging)).to eq(tagging)
-    end
-  end
+  # describe "GET #show" do
+  #   it "assigns the requested tagging as @tagging" do
+  #     tagging = Tagging.create! valid_attributes
+  #     get :show, params: {id: tagging.to_param}, session: valid_session
+  #     expect(assigns(:tagging)).to eq(tagging)
+  #   end
+  # end
 
   describe "GET #new" do
     it "assigns a new tagging as @tagging" do
-      get :new, params: {}, session: valid_session
+      get :new, params: { book_id: book.id }, session: valid_session
       expect(assigns(:tagging)).to be_a_new(Tagging)
     end
   end
@@ -62,7 +70,7 @@ RSpec.describe TaggingsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested tagging as @tagging" do
       tagging = Tagging.create! valid_attributes
-      get :edit, params: {id: tagging.to_param}, session: valid_session
+      get :edit, params: { book_id: book.id, id: tagging.to_param}, session: valid_session
       expect(assigns(:tagging)).to eq(tagging)
     end
   end
@@ -71,7 +79,7 @@ RSpec.describe TaggingsController, type: :controller do
     context "with valid params" do
       it "creates a new Tagging" do
         expect {
-          post :create, params: {tagging: valid_attributes}, session: valid_session
+          post :create, params: { book_id: book.id, tagging: valid_attributes}, session: valid_session
         }.to change(Tagging, :count).by(1)
       end
 
@@ -83,7 +91,7 @@ RSpec.describe TaggingsController, type: :controller do
 
       it "redirects to the created tagging" do
         post :create, params: {tagging: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Tagging.last)
+        expect(response).to redirect_to(book_path(book))
       end
     end
 
@@ -102,15 +110,17 @@ RSpec.describe TaggingsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
+      let(:new_tag) {Tag.create(name: '音楽')}
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { tag_id: new_tag.id }
       }
-
+      
       it "updates the requested tagging" do
         tagging = Tagging.create! valid_attributes
         put :update, params: {id: tagging.to_param, tagging: new_attributes}, session: valid_session
         tagging.reload
-        skip("Add assertions for updated state")
+        expect(tagging.tag_id).to eq new_attributes[:tag_id]
+        # skip("Add assertions for updated state")
       end
 
       it "assigns the requested tagging as @tagging" do
@@ -145,7 +155,7 @@ RSpec.describe TaggingsController, type: :controller do
     it "destroys the requested tagging" do
       tagging = Tagging.create! valid_attributes
       expect {
-        delete :destroy, params: {id: tagging.to_param}, session: valid_session
+        delete :destroy, params: { book_id: book.id, id: tagging.to_param}, session: valid_session
       }.to change(Tagging, :count).by(-1)
     end
 
