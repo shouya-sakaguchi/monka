@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe TagsController, type: :routing do
+ 
   describe "routing" do
 
     it "routes to #index" do
@@ -11,9 +12,9 @@ RSpec.describe TagsController, type: :routing do
       expect(:get => "/tags/new").to route_to("tags#new")
     end
 
-    it "routes to #show" do
-      expect(:get => "/tags/1").to route_to("tags#show", :id => "1")
-    end
+    # it "routes to #show" do
+    #   expect(:get => "/tags/1").to route_to("tags#show", :id => "1")
+    # end
 
     it "routes to #edit" do
       expect(:get => "/tags/1/edit").to route_to("tags#edit", :id => "1")
