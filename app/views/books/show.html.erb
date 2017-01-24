@@ -34,10 +34,8 @@ a-hidden="true">&times;</span></button>
 <% @book.taggings.each do |tagging| %>
 <li>
 <span class="btn btn-info"><%= tagging.tag.name %></span>
-<%= link_to '編集', edit_book_tagging_path(@book, tagging), class: 'btn btn-xs btndefault'
-%>
-<%= link_to '削除', book_tagging_path(@book, tagging), method: :delete, data: { con
-firm: 'Are you sure?' }, class: 'btn btn-xs btn-default' %>
+<%= link_to '編集', edit_book_tagging_path(@book, tagging), class: 'btn btn-xs btndefault' %>
+<%= link_to '削除', book_tagging_path(@book, tagging), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-default' %>
 </li>
 <% end %>
 </ul>

@@ -36,8 +36,7 @@
           <ul class="nav nav-sidebar">
             <li><%= link_to 'Book', books_path, class:"#{'active' if current_page?(books_path)}" %></li>
             <li><%= link_to 'Tags', tags_path, class:"#{'active' if current_page?(tags_path)}" %></li>
-            <li><%= link_to 'Users', users_path, class:"active" %></li>
-<!--            <li><%= link_to 'Users', users_path, class:"#{'active' if current_page?(users_path)}" %></li> -->
+            <li><%= link_to 'Users', users_path, class:"#{'active' if current_page?(users_path)}" %></li>
           </ul>
           <% end %>
         </div>

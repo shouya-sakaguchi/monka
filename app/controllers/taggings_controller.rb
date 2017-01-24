@@ -5,6 +5,7 @@ class TaggingsController < ApplicationController
   # GET /taggings
   # GET /taggings.json
   def index
+    @book = Book.all
     @taggings = Tagging.all
   end
 
@@ -15,21 +16,24 @@ class TaggingsController < ApplicationController
 
   # GET /taggings/new
   def new
+    @book = Book.all
     @tagging = Tagging.new
   end
 
   # GET /taggings/1/edit
   def edit
+    @book = Book.all
   end
 
   # POST /taggings
   # POST /taggings.json
   def create
+    @book = Book.all
     @tagging = Tagging.new(tagging_params)
 
     respond_to do |format|
       if @tagging.save
-        format.html { redirect_to @tagging, notice: 'Tagging was successfully created.' }
+        format.html { redirect_to @book, notice: 'Tagging was successfully created.' }
         format.json { render :show, status: :created, location: @tagging }
       else
         format.html { render :new }
