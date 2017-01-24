@@ -1,3 +1,4 @@
 class Book < ApplicationRecord
-    has_many :tagging
+    has_many :taggings
+    has_many :tags
 end
