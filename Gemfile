@@ -30,6 +30,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise-i18n'
 
+gem 'rails_12factor'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
