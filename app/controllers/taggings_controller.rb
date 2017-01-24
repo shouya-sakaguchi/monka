@@ -74,6 +74,6 @@ class TaggingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tagging_params
-      params.require(:tagging).permit(:book_id, :tag_id)
+      params.require(:taggings).permit(:book_id, :tag_id)
     end
 end
