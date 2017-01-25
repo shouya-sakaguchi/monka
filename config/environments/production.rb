@@ -55,7 +55,21 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "monka_#{Rails.env}"
-  config.action_mailer.perform_caching = false
+  
+  
+config.action_mailer.perform_caching = false
+  
+    config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    enable_starttls_auto: true,
+    address: 'smtp.gmail.com',
+    port: '587',
+    domain:'smtp.gmail.com',
+    authentication: 'plain',
+    user_name: ENV['MAIL_USER_NAME'],
+    password: ENV['MAIL_PASSWORD']
+  }
+
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
